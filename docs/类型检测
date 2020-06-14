@@ -1,0 +1,25 @@
+用空接口类型变量可以接受任何类型的赋值，如：
+
+var x interface{}
+x = 123
+x = "string"
+
+可通过以下方法对空接口类型变量进行类型检测
+if v,ok := x.(string); ok {
+    fmt.Print(v,ok)
+}else{
+    fmt.Print(v,ok)
+}
+v为变量x的值， ok为判断结果，如果是string则ok为true， 反之为false
+
+也可通过switch语句对x的类型进行处理：
+switch x.(type){
+    case string:
+        fmt.Print("this is string")
+    case float32:
+        fmt.Print("this is float 32")
+    case float64:
+        fmt.Print("this is float 64")
+    case int:
+        fmt.Print("this is int")
+}

@@ -1,0 +1,28 @@
+type Person struct{
+    name string
+    age int
+}
+
+匿名字段(继承)
+type Student struct{
+    Person   //代表了Human结构体所有的字段，类似与继承了Human
+    score int
+}
+
+func (person Person) getNameAge() (string int){
+    return person.name person.age
+}
+
+func (student Student) getScore() (int){
+    return student.score
+}
+
+Student类不仅继承了Person类的name和age属性，也继承了getNameAge方法。
+
+student = new(Student)
+student.name = "eponia"
+student.age = 29
+student.score = 59
+
+name, age = student.getNameAge()   //student可以调用Person类的方法
+fmt.Printf("%s %d", name, age)

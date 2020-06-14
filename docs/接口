@@ -1,0 +1,62 @@
+定义语法：
+
+type InterfaceName interface {
+    Func1(para paratype) returntype
+    Func2(para paratype) returntype
+}
+
+
+e.g.
+下面定义了一个名为Animal的接口，该接口需要实现两个函数， Fly和Run
+type Animal interface{
+    Fly()
+    Run(place string, speed int) bool
+}
+
+然后定义一个类Bird, 实现了Animal定义的所有接口函数，则可以说Bird实现了Animal接口
+type Bird struct{
+    kind string
+    weight int
+}
+
+func (bird Bird) Fly(){
+    fmt.Printf("A [%s] weighting [%d] is flying", bird.kind, bird.weight)
+}
+
+func (bird Bird) Run(place string, speed int) bool{
+    fmt.Printf("Bird is running on [%s] in speed of [%d]")
+}
+
+接下来就可以用animal接口来调用Bird类的方法：
+var animal Animal  //定义一个Animal类型的接口变量
+bird := new(Bird)  //实例化一个Bird类
+animal = bird      //可以让将bird实例赋值给接口变量
+
+//则可通过接口变量调用Bird类的方法
+animal.Fly()
+animal.Run("park", 20)
+
+
+也可以将接口赋值给另一个接口
+如：
+type Animal2 interface{
+    Fly()
+}
+则可以将animal赋值给一个Animal2类型的接口,e.g.
+var animal Animal
+var animal2 Animal
+animal2 = animal
+
+但是不能将animal2赋值给animal， 因为animal2没有实现Animal接口中的Run方法
+重点：
+空接口：
+interface{} 空接口常用于接收任何类型的值， e.g.
+var a interface{}
+a = "string"
+a = 4.5
+a = 6
+
+如果不这样定义的话，是不能改变a的类型的， 如：
+a := "string" //这句话写完后a就是一个字符串类型了
+a = 4.5       //如果再将a的值改为4.5就会报错，因为不能将float32类型的值赋值给字符串类型的变量
+

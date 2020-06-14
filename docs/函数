@@ -1,0 +1,32 @@
+func funcname(para paratype) (returntype1, returntype2){
+    ...
+    ...
+}
+
+e.g.
+func foo(x,y int) (int boot){
+    z := x + y
+    return z, true
+}
+
+
+defer 关键字对其后的代码圧栈，在函数退出前或发生panic时执行
+
+e.g.
+
+func test(x int) int {
+    defer fmt.Print('before quit')
+    panic("I'm wrong")
+    fmt.Print('hello')
+}
+
+将输出以下内容：
+before quit
+I'm wrong
+
+匿名函数：
+f := func (x, y int) int{
+    return x + y
+}
+f(2,3) 将返回5
+

@@ -1,0 +1,32 @@
+结构体定义方式
+type Human struct{
+    name string
+    age int
+    gender string
+}
+
+匿名字段(继承)
+type Student struct{
+    Human   //代表了Human结构体所有的字段，类似与继承了Human
+    score int
+}
+实例化方法：
+student1 ：= Student(Human('owen', 25, male), 100)
+
+
+注意，下面的定义方式跟上面不一样：
+type Student struct{
+    name string
+    age int
+    gender string
+    score int
+}
+实例方法： student1 := Student('owen',25, male, 100)
+
+实例化类的几种方式：
+s1 := new(Student)   返回值类型为Student的指针类型（*Student）
+s2 := &Student{}     返回值类型为Student的指针类型（*Student）
+s3 := &Student{"owen", 18, "male", 100}  返回值类型为Student的指针类型（*Student）
+
+s4 := Student{}      返回值为Student类型
+

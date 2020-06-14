@@ -1,0 +1,54 @@
+跟函数类似，但是有一个特别的参数作为Receiver， 这个参数是一个type（struct/类）
+形如：
+func (r receivertype) funcname(para paratype)(returntype,...){
+    ...
+    ...
+}
+
+e.g.
+
+type Human struct{
+    name string
+    age int
+}
+
+func (x Human) Walk(steps int,place string)(int,bool){
+    fmt.Printf("%s is %d years old",x.name,x.age)
+    fmt.Printf("he walked %d steps in %s",steps, string)
+    return steps,bool
+}
+
+方法中的receiver所属的type（struct）必须定义在该方法相同的package中
+方法可以理解为类的函数
+
+
+类的方法receiver参数传递（重点理解）：
+
+假设通过下面方法之一实例化了一个类：
+p := new(Human)        #返回的是*Human类型
+p := &Human{}           #返回的是*Human类型
+p := &Human{"owen",29}  #返回的是*Human类型
+p := Human{"owen", 29}  #返回的是Human类型
+
+func (person Human) setName(name string){
+    person.name = name
+}
+
+此时调用p.setName("eponia"),那么p.name是不会变成eponia的，原因是这样：
+调用p.setName("eponia")时，方法将p接收作为receiver参数，赋值给了person变量，相当于执行了person := p，
+创建了一个新的Human实例person， 方法内的person.name = name, 也就是对person这个实例进行了修改，而没有对p进行修改；
+类似与python中：
+def setName(name):
+    name = "eponia"
+
+Name = "owen"
+setName(Name)
+Name变量的值并不会变成“eponia”
+
+因此，方法一般这样定义：
+func (person *Human) setName(name string){
+    person.name = name
+}
+receiver定义为指针类型，通过指针去对实例的属性进行操作，就可以达到改变的目的。
+
+

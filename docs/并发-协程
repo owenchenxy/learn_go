@@ -1,0 +1,22 @@
+开启协程的方式：
+go 函数名
+如：
+func Test(msg string){
+    fmt.Println("This is "+msg)
+}
+
+go Test("1")
+go Test("2")
+
+如上便开启了两个协程
+
+func main(){
+    go Test("routine 1")
+    go Test("routine 2")
+
+    fmt.Println("This is the main thread")
+}
+
+会发现只打印了"This is the main thread"就退出了，这是因为go开启的两个协程开启后，主进程会继续执行下面的程序，
+直到cpu空闲时才会切换到协程，因此执行完主线程后程序就退出了，协程没有机会执行，
+此处可在main函数最后添加一个Sleep(1*time.Second), 使主程序延迟1s退出，此时cpu处于空闲，可以执行协程，就会输出Test函数中的内容了。
