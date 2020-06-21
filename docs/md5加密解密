@@ -1,0 +1,13 @@
+import (
+    "crypto/md5"
+    "encoding/hex"
+)
+func main(){
+    m := md5.New()                          //创建一个md5对象
+    m.Write([]byte("text to encrypt")       //将需加密的内容写入该对象
+    cipher := m.Sum(nil)                    //将m的checksum和与nil的相加，得到的即是m的checksum
+    cipherStr := hex.EncodeToString(cipherStr)  //将加密结果转换为字符串
+    fmt.Print(cipherStr)
+}
+
+md5是不可逆的，因此不能解密

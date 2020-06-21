@@ -1,0 +1,21 @@
+//json解码
+func Unmarshal(data []byte, v interface{}) error  //该函数将data的值解码赋值给变量v，因此v传入的是地址
+
+e.g.
+//对结构体实例进行json编码
+/*
+type Student struct{
+    Name string        //首字母大写，可以被外部调用，可以被json编码
+    age int             //首字母小写，私有变量，只能被类自身的实例自己调用，不可被json读取并编码
+}
+*/
+student := Student{"owen",25}
+res2,err2 := json.Marshal(student)
+if err2 != nil{
+    panic(err2)
+}
+fmt.Printf("%v\n",string(res2)) //可以看到age字段没有被编码，只有name字段被json编码
+
+//对一个结构体类型实例的json编码进行解码，以上代码中的res2是对结构体类型实例的json编码
+var dec_res interface{}   //创建一个空接口准备接收解码结果
+json.Unmarshal(res2, &dec_res)  //dec_res的值即为解码结果

@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func test(arr []int) (int,bool){
 	sum := 0
 	for _,v := range(arr){
@@ -10,7 +8,7 @@ func test(arr []int) (int,bool){
 	return sum, true
 }
 
-
+/*
 type Student struct{
 	Human
 	score int
@@ -20,12 +18,15 @@ type Human struct{
 	age int
 }
 
+
 func (x Human) Walk(steps int,place string)(int,bool){
 	fmt.Printf("%s is %d years old\n",x.name,x.age)
 	fmt.Printf("he walked %d steps in %s\n",steps, place)
 	return steps,true
 }
 
+
+ */
 //func main (){
 	//arr := []int{1,2,3}
 	//f := func(x,y int)int{ return x+y}

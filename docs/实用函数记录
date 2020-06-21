@@ -1,0 +1,4 @@
+import "strconv"
+
+i := 1
+a := strconv.Itoa(i)  //将i转换成字符串类型

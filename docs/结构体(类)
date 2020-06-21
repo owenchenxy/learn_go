@@ -1,6 +1,6 @@
 结构体定义方式
 type Human struct{
-    name string
+    name string       //name变量名开头小写，未私有变量，将不能被外部程序（除某个Human实例自身以外）调用（如json编码将不会显示该字段），改为Name即可被外部程序调用
     age int
     gender string
 }
@@ -11,7 +11,7 @@ type Student struct{
     score int
 }
 实例化方法：
-student1 ：= Student(Human('owen', 25, male), 100)
+student1 ：= Student{Human('owen', 25, male), 100}
 
 
 注意，下面的定义方式跟上面不一样：
@@ -21,7 +21,7 @@ type Student struct{
     gender string
     score int
 }
-实例方法： student1 := Student('owen',25, male, 100)
+实例方法： student1 := Student{'owen',25, male, 100}
 
 实例化类的几种方式：
 s1 := new(Student)   返回值类型为Student的指针类型（*Student）

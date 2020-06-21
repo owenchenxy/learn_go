@@ -1,0 +1,36 @@
+select{
+    case <- ch1:
+        fmt.Print("This is goroutine 1")
+    case <- ch2:
+        fmt.Print("This is goroutine 2")
+    default:
+        fmt.Print("This is default")
+}
+
+上面的代码，会尝试去ch1 和ch2两个channel中读，如果能读到，则进入相应的代码分支，如果都阻塞，则进入default；
+
+示例（超时）：
+ch := make(chan int)
+timeout := make(chan int)
+
+go func(){
+    time.Sleep(time.Second)
+    timeout <- 1
+}()
+
+select{
+    case <- ch1:
+        fmt.Print("goroutine 1")
+    case <- timeout:
+        fmt.Print("timeout")
+}
+
+上述代码将在运行1s后打印出timeout
+
+timeout有更简单的实现：
+select{
+    case <- ch1:
+        fmt.Print("goroutine 1")
+    case <- time.After(time.Second):       //time包的After函数将在参数定义的时间后向该channel写入
+        fmt.Print("timeout")
+}

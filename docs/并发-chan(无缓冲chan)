@@ -1,0 +1,19 @@
+chan既是channel， 用来解决协程（goroutine）之间的通信问题
+
+声明方式：
+var channelName chan elementType
+
+e.g.
+var ch chan int
+ch = make(chan int)  //注意ch初始化需要make分配空间
+或者使用简短声明：
+ch := make(chan int)
+
+对chan的读写方式：
+ch <- 2 //将2写入ch
+x := <- ch //从ch中读取并赋值给x
+
+对chan的读写操作都会阻塞：
+当一个goroutine对chan写，而并没有其他goroutine对chan读的话，写的goroutine会阻塞，直到有读操作发生
+同理，读chan也会阻塞，直到有写操作发生
+

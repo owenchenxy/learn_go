@@ -1,0 +1,46 @@
+//json编码
+func Marshal(v interface{})([]byte, error)
+
+import "encoding/json"
+func main(){
+//对数组进行编码：
+a := [5]int{1,2,3,4,5}
+res,err := json.Marshal(a)
+if err != nil {
+    panic(err)
+}
+fmt.Print("%v",string(res))
+
+//对map类型进行编码
+m ：= make(map[string]string)
+m["owen"] = "chen"
+res1,err1 := json.Marshal(m)
+if err1 != nil {
+    panic(err1)
+}
+fmt.Print("%v",string(res1))
+
+//对结构体进行json编码
+/*
+type Student struct{
+    Name string        //首字母大写，可以被外部调用，可以被json编码
+    age int             //首字母小写，私有变量，只能被类自身的实例自己调用，不可被json读取并编码
+}
+*/
+student := Student{"owen",25}
+res2,err2 := json.Marshal(student)
+if err2 != nil{
+    panic(err2)
+}
+fmt.Printf("%v\n",string(res2)) //可以看到age字段没有被编码，只有name字段被json编码
+
+//在结构体定义时，可以指定字段json编码的key
+/*
+type Student struct{
+    Name string `json:"student_name"`       //指定该字段经json编码后显示为student_name
+    age int             //首字母小写，私有变量，只能被类自身的实例自己调用，不可被json读取并编码
+}
+*/
+}
+
+

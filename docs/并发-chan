@@ -1,1 +1,0 @@
-chan既是channel， 用来解决协程（goroutine）之间的通信问题
