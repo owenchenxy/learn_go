@@ -9,7 +9,6 @@ import (
 
 func main(){
 	url := "http://www.baidu.com"
-	content_type := "application/x-www-form-urlencoded"
 	//resp, err := http.Post(url, content_type, strings.NewReader("id=1,name=2"))
 
 	// GET 请求
